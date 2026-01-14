@@ -67,8 +67,8 @@ Direct inputs:
 
 target_mpc_code = 433
 
-observations_start = datetime.datetime(1890, 1, 1)
-observations_end = datetime.datetime(1900, 7, 1)
+observations_start = datetime.datetime(2018, 1, 1)
+observations_end = datetime.datetime(2023, 7, 1)
 
 # number of iterations for our estimation
 number_of_pod_iterations = 6
