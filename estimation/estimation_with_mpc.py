@@ -67,8 +67,8 @@ Direct inputs:
 
 target_mpc_code = 433
 
-observations_start = datetime.datetime(2018, 1, 1)
-observations_end = datetime.datetime(2023, 7, 1)
+observations_start = datetime.datetime(1890, 1, 1)
+observations_end = datetime.datetime(1900, 7, 1)
 
 # number of iterations for our estimation
 number_of_pod_iterations = 6
@@ -78,6 +78,7 @@ timestep_global = 20 * 3600.0
 
 # 1 month time buffer used to avoid interpolation errors:
 time_buffer = 1 * 31 * 86400.0
+
 
 # define the frame origin and orientation.
 global_frame_origin = "SSB"
@@ -112,6 +113,10 @@ batch.filter(
 )
 
 batch.summary()
+fig = batch.plot_observations_sky(figsize=(6, 4))
+fig.suptitle(f"{batch.size} observations for {target_name} in the sky")
+plt.show()
+exit()
 
 
 """
@@ -131,13 +136,12 @@ As we can see, observations by WISE, TESS and Yangwang, as well as some non-geoc
 
 obs_by_WISE = (
     batch.table.query("observatory == 'C51'")
-    .loc[:, ["number", "epochUTC", "RA", "DEC"]]
+    .loc[:, ["number", "epochJ2000secondsTDB", "RA", "DEC"]]
     .iloc[[0, -1]]
 )
 
 print("\nInitial and Final Observations by WISE:")
 print(obs_by_WISE)
-
 
 """
 While the observations from space telescopes appear to be useful, including them requires setting up the dynamics for the spacecraft, which is too advanced for this tutorial. Space-based observations will therefore be excluded later on in this example. 
@@ -286,7 +290,6 @@ For the integrator we use the fixed timestep RKF-7(8) setting our initial time t
 
 # Create numerical integrator settings
 integrator_settings = propagation_setup.integrator.runge_kutta_variable_step_size(
-    epoch_start_buffer,
     timestep_global,
     propagation_setup.integrator.CoefficientSets.rkf_78,
     timestep_global,
