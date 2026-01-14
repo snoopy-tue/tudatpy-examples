@@ -1019,7 +1019,7 @@ def plot_cartesian_single(
 
 
 def plot_star_catalog_corrections(
-        mpc_batch, include_satellites: bool = True, figsize=(9, 6)
+        mpc_batch: BatchMPC, include_satellites: bool = True, figsize=(9, 6)
 ):
     """
     Plot star catalog RA/DEC corrections per observation with optional satellite observations.
