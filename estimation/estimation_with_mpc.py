@@ -136,7 +136,7 @@ As we can see, observations by WISE, TESS and Yangwang, as well as some non-geoc
 
 obs_by_WISE = (
     batch.table.query("observatory == 'C51'")
-    .loc[:, ["number", "epochJ2000secondsTDB", "RA", "DEC"]]
+    .loc[:, ["number", "epochUTC", "RA", "DEC"]]
     .iloc[[0, -1]]
 )
 
