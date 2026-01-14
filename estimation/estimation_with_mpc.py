@@ -112,13 +112,6 @@ batch.filter(
     epoch_end=observations_end,
 )
 
-batch.summary()
-fig = batch.plot_observations_sky(figsize=(6, 4))
-fig.suptitle(f"{batch.size} observations for {target_name} in the sky")
-plt.show()
-exit()
-
-
 """
 Other than **Earth-based telescopes**, our batch also includes observations from **space telescopes**.
 Let's check that out. 
